@@ -1,140 +1,96 @@
-let amigos=[];
-let btnGuardar=document.querySelector("#btnGuardar");
-let btnCancelar=document.querySelector("#btnCancelar");
-
-
-
-
-let lista=document.querySelector(".listaAmigos");
-let formulario=document.querySelector("#formulario");
-
+let amigos = [];
+let btnGuardar = document.querySelector("#btnGuardar");
+let btnCancelar = document.querySelector("#btnCancelar");
+let lista = document.querySelector(".listaAmigos");
+let formulario = document.querySelector("#formulario");
 
 
 pintar();
 
-function limpiar(){
+function limpiar() {
 
-    formulario[0].value="";
-    formulario[1].value="";
-    formulario[2].value="";
-    formulario[3].value="";
+    formulario[0].value = "";
+    formulario[1].value = "";
+    formulario[2].value = "";
+    formulario[3].value = "";
 }
-
+// FUNCION DE ALERTAS
+// en esta funcion se pueden recibir, info, warning, error, success cada uno tiene su icono has pruebas
 function alertas(mensaje, type) {
     Swal.fire({
         title: mensaje,
         icon: type,
-        timer: 4000,
-        timerProgressBar: true,
-        toast: true,
-        position: 'top-start',
-        showConfirmButton: false,
-        showCloseButton: true,
+        
     });
 }
 
-function validTel(telefonoFind) {
-    const telEncontrado = amigos.find(element => element.trim().toLowerCase === telefonoFind.trim().toLowerCase());
-    if (telEncontrado) {
-        return true;
-        //alertas('si find');
-    }
-    else
-       // alertas('no find');
-        return false;
-}
-// ////////////////////////////////
 
 
-
-
-
-
-
-
-function pintar(){
-    if(amigos.length>0)
-    {
-        lista.innerHTML="";
-        amigos.forEach((contacto,index)=>{
-            let amigo=document.createElement("div");
-            amigo.innerHTML=`<p>${contacto.nombre}</p><button class="muestraDetalles"><input type="hidden" value="${contacto.telefono}" />Detalles</button><button class="eliminarContacto" indice="${index}">Borrar</button`;
+function pintar() {
+    if (amigos.length > 0) {
+        lista.innerHTML = "";
+        amigos.forEach((contacto, index) => {
+            let amigo = document.createElement("div");
+            amigo.innerHTML = `<p>${contacto.nombre}</p><button class="muestraDetalles"><input type="hidden" value="${contacto.telefono}" />Detalles</button><button class="eliminarContacto" indice="${index}">Borrar</button`;
             lista.appendChild(amigo);
         });
-        let botones=document.getElementsByClassName("muestraDetalles");
+        let botones = document.getElementsByClassName("muestraDetalles");
         for (let i = 0; i < botones.length; i++) {
             const element = botones[i];
-            element.addEventListener("click",()=>{
-            showDetalles(element.children[0].value);
+            element.addEventListener("click", () => {
+                showDetalles(element.children[0].value);
             });
         }
-         botones=document.getElementsByClassName("eliminarContacto");
-        for (let i = 0; i <botones.length; i++){
-            const element = botones [i];
-            element.addEventListener("click",()=>{
-                amigos.splice(element.getAttribute("indice"),1);
+        botones = document.getElementsByClassName("eliminarContacto");
+        for (let i = 0; i < botones.length; i++) {
+            const element = botones[i];
+            element.addEventListener("click", () => {
+                amigos.splice(element.getAttribute("indice"), 1);
                 pintar();
             });
         }
-
-
     }
-    else{
-        lista.innerHTML="<h2>No tenemos amigos</h2>";
+    else {
+        lista.innerHTML = "<h2>No tenemos amigos</h2>";
     }
 }
 
-function showDetalles(tel){
-    let detalles=document.getElementById("detallesAmigo");
-    let amigo=amigos.find(a=>{
-        if(a.telefono==tel)
-        {
+function showDetalles(tel) {
+    let detalles = document.getElementById("detallesAmigo");
+    let amigo = amigos.find(a => {
+        if (a.telefono == tel) {
             return a;
         }
     });
-    detalles.innerHTML=`<img src="${amigo.foto}" alt="">
+    detalles.innerHTML = `<img src="${amigo.foto}" alt="">
     <h3>${amigo.nombre}<h3/>
     <p><span>teléfono:</span>${amigo.telefono}<p/>
     <p><span>Correo:</span>${amigo.correo}</p>
     <button id="btncerrar">Cerrar</button>`;
     detalles.classList.remove("oculto");
 
-    let btncerrar=document.getElementById("btncerrar");
-    btncerrar.addEventListener("click",(Event=>{
+    let btncerrar = document.getElementById("btncerrar");
+    btncerrar.addEventListener("click", (Event => {
         detalles.classList.add("oculto");
     }));
-
-   
-
 }
 
 
-
-
-
-
-
-btnCancelar.addEventListener("click",(Event)=>{
+btnCancelar.addEventListener("click", (Event) => {
     limpiar();
     Event.preventDefault();
 });
 
+btnGuardar.addEventListener("click", (Event) => {
 
-
-
-
-
-
-btnGuardar.addEventListener("click",(Event)=>{
-   
     if (formulario["nombre"].value == "" || formulario["telefono"].value == "" || formulario["correo"].value == "" || formulario["foto"].value == "") { // valida que ningun campo este vacio
         alertas('Favor de llenar todos los campos', 'warning');//
     }//
     else {//
 
-        const tel = formulario["telefono"].value; // guardar el valor en una variable
-        validTel(tel); // llamar a la funcion
-        if (!validTel(tel)) { // si la funcion es false entra al fi
+       
+       
+      
         let contacto = {
             nombre: formulario["nombre"].value,
             telefono: formulario["telefono"].value,
@@ -145,13 +101,13 @@ btnGuardar.addEventListener("click",(Event)=>{
         amigos.push(contacto);
         limpiar();
         pintar();
-        }// si no pues dice ya existe
-        else//
-            alertas('existe', 'warning');//
+        // si no pues dice ya existe
+        
 
     }
     Event.preventDefault();
 });
+
 
 
 
