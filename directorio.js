@@ -20,6 +20,37 @@ function limpiar(){
     formulario[3].value="";
 }
 
+function alertas(mensaje, type) {
+    Swal.fire({
+        title: mensaje,
+        icon: type,
+        timer: 4000,
+        timerProgressBar: true,
+        toast: true,
+        position: 'top-start',
+        showConfirmButton: false,
+        showCloseButton: true,
+    });
+}
+
+function validTel(telefonoFind) {
+    const telEncontrado = amigos.find(element => element.trim().toLowerCase === telefonoFind.trim().toLowerCase());
+    if (telEncontrado) {
+        return true;
+        //alertas('si find');
+    }
+    else
+       // alertas('no find');
+        return false;
+}
+// ////////////////////////////////
+
+
+
+
+
+
+
 
 function pintar(){
     if(amigos.length>0)
@@ -93,24 +124,34 @@ btnCancelar.addEventListener("click",(Event)=>{
 
 
 
+
 btnGuardar.addEventListener("click",(Event)=>{
-const array=[0,1,2,3];
+   
+    if (formulario["nombre"].value == "" || formulario["telefono"].value == "" || formulario["correo"].value == "" || formulario["foto"].value == "") { // valida que ningun campo este vacio
+        alertas('Favor de llenar todos los campos', 'warning');//
+    }//
+    else {//
 
+        const tel = formulario["telefono"].value; // guardar el valor en una variable
+        validTel(tel); // llamar a la funcion
+        if (!validTel(tel)) { // si la funcion es false entra al fi
+        let contacto = {
+            nombre: formulario["nombre"].value,
+            telefono: formulario["telefono"].value,
+            correo: formulario["correo"].value,
+            foto: formulario["foto"].value
+        };
 
+        amigos.push(contacto);
+        limpiar();
+        pintar();
+        }// si no pues dice ya existe
+        else//
+            alertas('existe', 'warning');//
 
-    let contacto={
-        nombre:formulario["nombre"].value,
-        telefono:formulario["telefono"].value,
-        correo:formulario["correo"].value,
-        foto:formulario["foto"].value
-    };
-
-    amigos.push(contacto);
-    limpiar();
-    pintar();
+    }
     Event.preventDefault();
 });
-
 
 
 
