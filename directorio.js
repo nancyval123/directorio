@@ -3,7 +3,6 @@ let btnGuardar = document.querySelector("#btnGuardar");
 let btnCancelar = document.querySelector("#btnCancelar");
 let lista = document.querySelector(".listaAmigos");
 let formulario = document.querySelector("#formulario");
-
 let mens=document.querySelector("#alerta");
 
 pintar();
@@ -24,8 +23,6 @@ function alertas(mensaje, type) {
         
     });
 }
-
-
 
 function pintar() {
     if (amigos.length > 0) {
@@ -82,9 +79,6 @@ btnCancelar.addEventListener("click", (Event) => {
     Event.preventDefault();
 });
 
-
-
-
 btnGuardar.addEventListener("click", (Event) => {
 
 
@@ -95,7 +89,6 @@ btnGuardar.addEventListener("click", (Event) => {
            
         } 
     })
-    
         console.log(found);
        
         if (found) {
@@ -125,13 +118,5 @@ btnGuardar.addEventListener("click", (Event) => {
 
     }
 
-
-
-
-
-   
-
     Event.preventDefault();
 });
-
-
