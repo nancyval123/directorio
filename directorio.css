@@ -84,7 +84,7 @@ main .formulario form #btnGuardar{
 }
 
 main .formulario form #btnCancelar{
-    background-color:red;
+    background-color:rgb(179, 27, 27);
     cursor: pointer;
 }
 
