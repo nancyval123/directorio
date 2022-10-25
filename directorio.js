@@ -20,7 +20,12 @@ function alertas(mensaje, type) {
     Swal.fire({
         title: mensaje,
         icon: type,
-        
+        timer:4000,
+        timerProgressBar: true,
+        toast: true,
+        position: 'top-start',
+        showConfirmButton: false,
+        showCloseButton: true,
     });
 }
 
@@ -107,3 +112,5 @@ btnGuardar.addEventListener("click", (Event) => {
     }
     Event.preventDefault();
 });
+
+
