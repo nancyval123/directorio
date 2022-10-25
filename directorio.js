@@ -4,6 +4,7 @@ let btnCancelar = document.querySelector("#btnCancelar");
 let lista = document.querySelector(".listaAmigos");
 let formulario = document.querySelector("#formulario");
 
+let mens=document.querySelector("#alerta");
 
 pintar();
 
@@ -20,12 +21,7 @@ function alertas(mensaje, type) {
     Swal.fire({
         title: mensaje,
         icon: type,
-        timer:4000,
-        timerProgressBar: true,
-        toast: true,
-        position: 'top-start',
-        showConfirmButton: false,
-        showCloseButton: true,
+        
     });
 }
 
@@ -86,30 +82,55 @@ btnCancelar.addEventListener("click", (Event) => {
     Event.preventDefault();
 });
 
+
+
+
 btnGuardar.addEventListener("click", (Event) => {
 
+
+    found = amigos.find(prueba => {
+        if (prueba.telefono == formulario[1].value) {
+            event.preventDefault();
+            return prueba;
+           
+        } 
+    })
+    
+        console.log(found);
+       
+        if (found) {
+            
+           alertas("El número de teléfono ya existe");
+            alerta.classList.remove("oculto");
+        }
+    
     if (formulario["nombre"].value == "" || formulario["telefono"].value == "" || formulario["correo"].value == "" || formulario["foto"].value == "") { // valida que ningun campo este vacio
         alertas('Favor de llenar todos los campos', 'warning');//
     }//
-    else {//
+    else
+    {//
 
-       
-       
-      
         let contacto = {
             nombre: formulario["nombre"].value,
             telefono: formulario["telefono"].value,
             correo: formulario["correo"].value,
             foto: formulario["foto"].value
         };
+        
 
         amigos.push(contacto);
         limpiar();
         pintar();
         // si no pues dice ya existe
-        
 
     }
+
+
+
+
+
+   
+
     Event.preventDefault();
 });
 
