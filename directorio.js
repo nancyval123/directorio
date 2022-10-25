@@ -107,7 +107,3 @@ btnGuardar.addEventListener("click", (Event) => {
     }
     Event.preventDefault();
 });
-
-
-
-

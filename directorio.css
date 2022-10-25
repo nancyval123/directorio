@@ -79,12 +79,12 @@ main .formulario form div button{
 }
 
 main .formulario form #btnGuardar{
-    background-color: green;
+    background-color: blue;
     cursor: pointer;
 }
 
 main .formulario form #btnCancelar{
-    background-color: orangered;
+    background-color:red;
     cursor: pointer;
 }
 
